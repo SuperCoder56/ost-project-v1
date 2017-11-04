@@ -91,27 +91,93 @@
 
                     <!-- Menu ends -->
                 </div>
+<?php
 
-              
 
 
-    <div  class="text-center" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" style="margin-top: 60px;">
+   if(isset($_POST['submit'])) {
+   
+       $ID = $_POST['inputEmail'];
+       $Password = $_POST['inputPassword'];
+
+       
+       $con =mysqli_connect("localhost","root","user123");
+       mysqli_select_db($con,"project_database");
+
+       if(!$con)
+        {
+       die('Could not connect: ' .mysqli_error());
+       }
+       else
+       {
+      
+         }
+      
+         $query = mysqli_query($con,"SELECT *  FROM user_table where user_email = '$ID' and user_password = '$Password' ") ;
+	$row = mysqli_fetch_array($query);
+  echo "<br>";
+      
+              while($a=mysqli_fetch_array($query))
+              {
+
+           echo $a['user_first_name'] . "&nbsp;" .$a['user_last_name'] ."&nbsp;"  .$a['user_city'] ."&nbsp;" .$a['user_email'] 
+           . "&nbsp;" .$a['user_password'];
+          echo "<br>";
+              }
+
+        $count = mysqli_num_rows($query);
+
+	if( $count==1)
+	{
+		
+		echo "<h2>SUCCESSFULLY LOGIN. GOING TO USER PROFILE PAGE...</h2>";
+   
+                 echo "<script>setTimeout(function () {
+       window.location.href = 'mypage.php'; //will redirect to your blog page (an ex: blog.html)
+    }, 5000); //will call the function after 4 secs.
+</script>";
+                  
+                 
+
+	}
+	else
+	{
+		echo "<p>SORRY... YOU ENTERD WRONG ID AND PASSWORD... PLEASE RETRY...<p>";
+	}
+
+       
+
+       mysqli_close($con);
+         
+         
+}
+
+
+
+?>
+     
+          
+
+
+    <div  class="text-center" style="margin-top: 60px;">
   <div class="modal-header">
     
     <h3>Ieee world : Login </h3>
   </div>
-  <div class="modal-body">
-    <form class="form-horizontal loginFrm">
+  <div>
+    <form class="form-horizontal loginFrm" method ="post" action ="">
       <div class="control-group">                               
-        <input type="text" id="inputEmail" placeholder="Email">
+        <input type="text" name="inputEmail" placeholder="Email">
       </div>
       <div class="control-group">
-        <input type="password" id="inputPassword" placeholder="Password">
+        <input type="password" name="inputPassword" placeholder="Password">
       </div>
       
-    </form>     
-    <button type="submit" class="btn btn-success">Log in</button>
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  
+    <button type="submit" name="submit"  class="btn btn-success">Log in</button>
+    <button class="btn" >Close</button>
+
+  </form>     
   </div>
 </div>
 

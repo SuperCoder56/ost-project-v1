@@ -32,6 +32,9 @@
 
              <!-- main content starts here -->
 
+
+
+
             <div class="container b-radius-top">
                 <div class="top-bar b-radius">
                     <div class="top-content">
@@ -57,6 +60,123 @@
                     <div class="site-name">
                         <h1>Ieee World</h1>
                         <h5>Free wireless networks research papers</h5>
+         <?php 
+        
+    
+
+   if(isset($_POST['submit'])) {
+   echo "clicked";
+
+ $paper_title = $_POST['paper_title'];
+  $paper_author = $_POST['author'];
+     $paper_publication = $_POST['publication'];
+      $paper_subject = $_POST['subject'];
+            $paper_volume = $_POST['volume'];
+               $paper_info = $_POST['paperInfo'];
+                   $paper_p_day = $_POST['p_day'];
+ $paper_p_month = $_POST['p_month'];
+ $paper_p_year = $_POST['p_year'];
+
+    
+          $file = rand(1000,100000)."-".$_FILES['file']['name'];
+
+       $file_test = $_FILES['file'];
+             print_r($file_test);
+
+
+    $file_loc = $_FILES['file']['tmp_name'];
+ $file_size = $_FILES['file']['size'];
+ $file_type = $_FILES['file']['type'];
+ $folder="upload/";
+ 
+ // new file size in KB
+ $new_size = $file_size/1024;  
+ // new file size in KB
+ 
+ // make file name in lower case
+ $new_file_name = strtolower($file);
+ // make file name in lower case
+ 
+ $final_file=str_replace(' ','-',$new_file_name);
+ echo "<br>title " . $paper_title;
+echo "<br>author " . $paper_author;
+
+echo "<br>publication " . $paper_publication;
+
+echo "<br>subject " . $paper_subject;
+
+echo "<br>Volume " . $paper_volume;
+
+echo "<br>Info " . $paper_info;
+
+echo "<br>P day " . $paper_p_day;
+
+echo "<br>p m" . $paper_p_month;
+
+
+echo "<br>p y " . $paper_p_year;
+echo "<br>paper file  " . $final_file;
+echo "<br>paper file type  " .$file_type ;
+echo "<br>paper file size  " .$new_size;
+
+
+
+ 
+echo "submit is pressed";
+$isUpload=move_uploaded_file($file_loc,$folder.$final_file);
+print_r($isUpload);
+  
+    if($isUpload==1)
+   {
+    echo "inside query";
+   $sql = "INSERT INTO paper_table (paper_title,paper_author, paper_publication, paper_subject,paper_volume, paper_info, paper_p_day,paper_p_month,paper_p_year,paper_file,paper_type,paper_size) VALUES ('$paper_title','$paper_author', '$paper_publication', '$paper_subject','$paper_volume', '$paper_info', '$paper_p_day','$paper_p_month','$paper_p_year', '$final_file','$file_type','$new_size' ) ";
+
+echo "<br>inside p y " . $paper_p_year;
+echo "<br>paper file  " . $final_file;
+echo "<br>paper file type  " .$file_type ;
+echo "<br>paper file size  " .$new_size;
+ $con =mysqli_connect("localhost","root","user123");
+        mysqli_select_db($con,"project_database");
+
+      if(!$con)
+      {
+   die('Could not connect: ' .mysqli_error());
+   }
+   else
+   {
+    echo "<br>successful connection";
+    }
+     
+  
+            $retval = mysqli_query($con,$sql );
+         
+            if(! $retval ) {
+               die('Could not enter data: ' . mysqli_error());
+            }
+            else{
+         
+            echo "Entered data successfully\n";
+                }
+
+mysqli_close($con);
+     }
+     else{
+     echo "<br>not uploaded !";
+
+      }
+           
+ 
+         
+
+}
+         
+
+
+
+?>
+
+                        
+
                                     
 
 
@@ -93,6 +213,8 @@
                     <!-- Menu ends -->
                 </div>
 
+                             </div>
+  
               
 
 
@@ -106,18 +228,11 @@
 <h3 class="title"><span>Upload page</span></h3>
     <ul class="breadcrumb">
         <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-        <li class="active">Registration</li>
+        <li class="active">Upload</li>
     </ul>
     <div class="well">
-    <div class="alert fade in">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-     </div>
-     <div class="alert alert-block alert-error fade in">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-     </div>
-    <form class="form-horizontal">
+    
+    <form class="form-horizontal" method="post" action="" enctype="multipart/form-data" >
         
             
 
@@ -126,36 +241,36 @@
         <div class="control-group">
             <label class="control-label" for="city">Title<sup>*</sup></label>
             <div class="controls">
-              <input type="text" id="page-title" placeholder="title"> 
+              <input type="text" name="paper_title" placeholder="title"> 
             </div>
         </div>
 
          <div class="control-group">
             <label class="control-label" for="city">Author<sup>*</sup></label>
             <div class="controls">
-              <input type="text" id="author" placeholder="author"> 
+              <input type="text" name="author" placeholder="author"> 
             </div>
         </div>
      
         <div class="control-group">
             <label class="control-label" for="city">Publication<sup>*</sup></label>
             <div class="controls">
-              <input type="text" id="publication" placeholder="publication"> 
+              <input type="text" name="publication" placeholder="publication"> 
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label" for="state">Subject<sup>*</sup></label>
             <div class="controls">
-              <select id="state">
+              <select name="subject">
                 <option value="">-</option>
-                <option value="1">Alabama</option><option value="2">Alaska</option><option value="3">Arizona</option><option value="4">Arkansas</option><option value="5">California</option><option value="6">Colorado</option><option value="7">Connecticut</option><option value="8">Delaware</option><option value="53">District of Columbia</option><option value="9">Florida</option><option value="10">Georgia</option><option value="11">Hawaii</option><option value="12">Idaho</option><option value="13">Illinois</option><option value="14">Indiana</option><option value="15">Iowa</option><option value="16">Kansas</option><option value="17">Kentucky</option><option value="18">Louisiana</option><option value="19">Maine</option><option value="20">Maryland</option><option value="21">Massachusetts</option><option value="22">Michigan</option><option value="23">Minnesota</option><option value="24">Mississippi</option><option value="25">Missouri</option><option value="26">Montana</option><option value="27">Nebraska</option><option value="28">Nevada</option><option value="29">New Hampshire</option><option value="30">New Jersey</option><option value="31">New Mexico</option><option value="32">New York</option><option value="33">North Carolina</option><option value="34">North Dakota</option><option value="35">Ohio</option><option value="36">Oklahoma</option><option value="37">Oregon</option><option value="38">Pennsylvania</option><option value="51">Puerto Rico</option><option value="39">Rhode Island</option><option value="40">South Carolina</option><option value="41">South Dakota</option><option value="42">Tennessee</option><option value="43">Texas</option><option value="52">US Virgin Islands</option><option value="44">Utah</option><option value="45">Vermont</option><option value="46">Virginia</option><option value="47">Washington</option><option value="48">West Virginia</option><option value="49">Wisconsin</option><option value="50">Wyoming</option></select>
+                <option value="wireless">Alabama</option></select>
             </div>
         </div>      
         <div class="control-group">
             <label class="control-label" for="postcode">Volume<sup>*</sup></label>
             <div class="controls">
-              <input type="text" id="volume" placeholder="Volume"> 
+              <input type="number" name="volume" placeholder="Volume"> 
             </div>
         </div>
         
@@ -163,87 +278,27 @@
         <div class="control-group">
             <label class="control-label" for="aditionalInfo">Brief introduction</label>
             <div class="controls">
-              <textarea name="aditionalInfo" id="aditionalInfo" cols="26" rows="3" placeholder="Additional information"></textarea>
+              <textarea name="paperInfo"  cols="26" rows="3" placeholder="Additional information"></textarea>
             </div>
         </div>
-        
-          <div class="control-group">
-        <label class="control-label">Publication Date<sup>*</sup></label>
+         <div class="control-group">
+        <label class="control-label">Publication Date <sup>*</sup></label>
         <div class="controls">
-          <select class="span1" name="days">
-                <option value="">-</option>
-                    <option value="1">1&nbsp;&nbsp;</option>
-                    <option value="2">2&nbsp;&nbsp;</option>
-                    <option value="3">3&nbsp;&nbsp;</option>
-                    <option value="4">4&nbsp;&nbsp;</option>
-                    <option value="5">5&nbsp;&nbsp;</option>
-                    <option value="6">6&nbsp;&nbsp;</option>
-                    <option value="7">7&nbsp;&nbsp;</option>
-                    <option value="8">8&nbsp;&nbsp;</option>
-                    <option value="9">9&nbsp;&nbsp;</option>
-                    <option value="10">10&nbsp;&nbsp;</option>
-                    <option value="11">11&nbsp;&nbsp;</option>
-                    <option value="12">12&nbsp;&nbsp;</option>
-                    <option value="13">13&nbsp;&nbsp;</option>
-                    <option value="14">14&nbsp;&nbsp;</option>
-                    <option value="15">15&nbsp;&nbsp;</option>
-                    <option value="16">16&nbsp;&nbsp;</option>
-                    <option value="17">17&nbsp;&nbsp;</option>
-                    <option value="18">18&nbsp;&nbsp;</option>
-                    <option value="19">19&nbsp;&nbsp;</option>
-                     <option value="20">20&nbsp;&nbsp;</option>
-                    <option value="21">21&nbsp;&nbsp;</option>
-                    <option value="22">22&nbsp;&nbsp;</option>
-                    <option value="23">23&nbsp;&nbsp;</option>
-                    <option value="24">24&nbsp;&nbsp;</option>
-                    <option value="25">25&nbsp;&nbsp;</option>
-                    <option value="26">26&nbsp;&nbsp;</option>
-                    <option value="27">27&nbsp;&nbsp;</option>
-                    <option value="28">28&nbsp;&nbsp;</option>
-                    <option value="29">29&nbsp;&nbsp;</option>
-                     <option value="30">30&nbsp;&nbsp;</option>
-                    <option value="31">31&nbsp;&nbsp;</option>
-            </select>
-            <select class="span1" name="months">
-                <option value="">-</option>
-                    <option value="1">1&nbsp;&nbsp;</option>
-                    <option value="2">2&nbsp;&nbsp;</option>
-                    <option value="3">3&nbsp;&nbsp;</option>
-                    <option value="4">4&nbsp;&nbsp;</option>
-                    <option value="5">5&nbsp;&nbsp;</option>
-                    <option value="6">6&nbsp;&nbsp;</option>
-                    <option value="7">7&nbsp;&nbsp;</option>
-                     <option value="8">8&nbsp;&nbsp;</option>
-                    <option value="9">9&nbsp;&nbsp;</option>
-                    <option value="10">10&nbsp;&nbsp;</option>
-                    <option value="11">11&nbsp;&nbsp;</option>
-                    <option value="12">12&nbsp;&nbsp;</option>
-            </select>
-            <select class="span1" name="year">
-                <option value="">-</option>
-                <option value="2008">2008&nbsp;&nbsp;</option>
-                    <option value="2009">2009&nbsp;&nbsp;</option>
-                    <option value="2010">2010&nbsp;&nbsp;</option>
-                    <option value="2011">2011&nbsp;&nbsp;</option>
-                    <option value="2012">2012&nbsp;&nbsp;</option>
-                    <option value="2013">2013&nbsp;&nbsp;</option>
-                    <option value="2014">2014&nbsp;&nbsp;</option>
-                    <option value="2015">2015&nbsp;&nbsp;</option>
-                    <option value="2016">2016&nbsp;&nbsp;</option>
-                    <option value="2017">2017&nbsp;&nbsp;</option>
-                    
-                   
-            </select>
+          <input type="number" class="span1" " name="p_day" placeholder="DD" min="1" max="31"> 
+<input type="number" class="span1" name="p_month" placeholder="MM" min="1" max="12"> 
+<input type="number" class="span1"  name="p_year" placeholder="YYYY" min="1900" max="2017"> 
         </div>
-    </div>
+      </div>
+          
+    <input type="file" name="file" />
         
     
     <div class="control-group">
             <div class="controls">
                 <input type="hidden" name="email_create" value="1">
                 <input type="hidden" name="is_new_customer" value="1">
-                <input class="btn btn-large" type="submit" value="Register">
-                <input class="btn btn-large" type="reset" value="Cancel">
+                <input class="btn btn-large" name="submit" type="submit" value="Upload">
+                <input class="btn btn-large" name="reset"type="reset" value="Cancel">
             </div>
         </div>      
     <p class="pull-right badge badge-important">[ * ] Required field    </p>

@@ -58,8 +58,7 @@
 
                     <div class="site-name">
                         <h1>Ieee World</h1>
-                        <h5>Free wireless networks research papers</h5>
-                    </div>
+                 </div>
 
                     <!-- Site Name ends -->
 
@@ -90,7 +89,64 @@
                     </div>
                     <!-- Menu ends -->
                 </div>
+<?php
 
+   if(isset($_POST['submit'])) {
+ 
+
+ $user_title = $_POST['personTitle'];
+  $user_first_name = $_POST['inputFname1'];
+     $user_last_name = $_POST['inputLnam'];
+      $user_email = $_POST['input_email'];
+            $user_password = $_POST['inputPassword1'];
+               $user_b_day = $_POST['b_day'];
+                   $user_b_month = $_POST['b_month'];
+            $user_b_year = $_POST['b_year'];
+             $user_city = $_POST['city'];
+               $user_state = $_POST['state'];
+                  $user_postcode = $_POST['postcode'];
+                    $user_country = $_POST['country'];
+                        $user_extra_info = $_POST['aditionalInfo'];
+                          $user_mobile = $_POST['mobile'];
+
+                             
+
+
+
+           $con =mysqli_connect("localhost","root","user123");
+              mysqli_select_db($con,"project_database");
+
+if(!$con)
+{
+die('Could not connected to database server. Please try after some time!: ' .mysqli_error());
+}
+else
+{
+
+}
+
+                  $sql1 = "INSERT INTO user_table ( user_title, user_first_name, user_last_name, user_email, user_password, user_b_day, user_b_month, user_b_year, user_city, user_state, user_post_code, user_country, user_extra_info, user_mobile )  VALUES  ( '$user_title' , '$user_first_name' , ' $user_last_name' , '$user_email', '$user_password ' , '$user_b_day' , '$user_b_month' , '$user_b_year' , '$user_city' , '$user_state' , '$user_postcode', '$user_country ', '$user_extra_info' , ' $user_mobile' ) ";
+
+
+            $retval = mysqli_query($con,$sql1 );
+         
+            if(! $retval ) {
+               die('Sign up failed. Please try again. Error : ' . mysqli_error());
+            }
+            else{
+         
+            echo "<h2>Registration Successful!</h2>";
+              echo "<p>Your user name is $user_first_name  $user_last_name</p>";
+               echo "<p>Your user user id is $user_email</p>";
+                 echo "<p>Thank you for sign up. Click <a href='mypage.php'>here </a>to log in </p><br>";
+                }
+
+}
+
+mysqli_close($con);
+
+?>
+     
               
 
 
@@ -107,84 +163,51 @@
         <li class="active">Registration</li>
     </ul>
     <div class="well">
-    <div class="alert fade in">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-     </div>
-     <div class="alert alert-block alert-error fade in">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-     </div>
-    <form class="form-horizontal">
+    
+    <form class="form-horizontal"  method = "post" action = "" >
         <h3>Your personal information</h3>
         <div class="control-group">
         <label class="control-label">Title <sup>*</sup></label>
         <div class="controls">
-        <select class="span1" name="days">
+        <select class="span1" name="personTitle" >
             <option value="">-</option>
-            <option value="1">Mr.</option>
-            <option value="2">Mrs</option>
-            <option value="3">Miss</option>
+            <option value="Mr">Mr.</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Miss">Miss</option>
         </select>
         </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="inputFname1">First name <sup>*</sup></label>
             <div class="controls">
-              <input type="text" id="inputFname1" placeholder="First Name">
+              <input type="text" name="inputFname1" placeholder="First Name">
             </div>
          </div>
          <div class="control-group">
             <label class="control-label" for="inputLnam">Last name <sup>*</sup></label>
             <div class="controls">
-              <input type="text" id="inputLnam" placeholder="Last Name">
+              <input type="text" name="inputLnam" placeholder="Last Name">
             </div>
          </div>
         <div class="control-group">
         <label class="control-label" for="input_email">Email <sup>*</sup></label>
         <div class="controls">
-          <input type="text" id="input_email" placeholder="Email">
+          <input type="text" name="input_email" placeholder="Email">
         </div>
       </div>      
     <div class="control-group">
         <label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
         <div class="controls">
-          <input type="password" id="inputPassword1" placeholder="Password">
+          <input type="password" name="inputPassword1" placeholder="Password">
         </div>
-      </div>      
+      </div>   
+   
         <div class="control-group">
         <label class="control-label">Date of Birth <sup>*</sup></label>
         <div class="controls">
-          <select class="span1" name="days">
-                <option value="">-</option>
-                    <option value="1">1&nbsp;&nbsp;</option>
-                    <option value="2">2&nbsp;&nbsp;</option>
-                    <option value="3">3&nbsp;&nbsp;</option>
-                    <option value="4">4&nbsp;&nbsp;</option>
-                    <option value="5">5&nbsp;&nbsp;</option>
-                    <option value="6">6&nbsp;&nbsp;</option>
-                    <option value="7">7&nbsp;&nbsp;</option>
-            </select>
-            <select class="span1" name="days">
-                <option value="">-</option>
-                    <option value="1">1&nbsp;&nbsp;</option>
-                    <option value="2">2&nbsp;&nbsp;</option>
-                    <option value="3">3&nbsp;&nbsp;</option>
-                    <option value="4">4&nbsp;&nbsp;</option>
-                    <option value="5">5&nbsp;&nbsp;</option>
-                    <option value="6">6&nbsp;&nbsp;</option>
-                    <option value="7">7&nbsp;&nbsp;</option>
-            </select>
-            <select class="span1" name="days">
-                <option value="">-</option>
-                    <option value="1">1&nbsp;&nbsp;</option>
-                    <option value="2">2&nbsp;&nbsp;</option>
-                    <option value="3">3&nbsp;&nbsp;</option>
-                    <option value="4">4&nbsp;&nbsp;</option>
-                    <option value="5">5&nbsp;&nbsp;</option>
-                    <option value="6">6&nbsp;&nbsp;</option>
-                    <option value="7">7&nbsp;&nbsp;</option>
-            </select>
+          <input type="number" class="span1" " name="b_day" placeholder="DD" min="1" max="31"> 
+<input type="number" class="span1" name="b_month" placeholder="MM" min="1" max="12"> 
+<input type="number" class="span1"  name="b_year" placeholder="YYYY" min="1900" max="2017"> 
         </div>
       </div>
 
@@ -195,44 +218,44 @@
         <div class="control-group">
             <label class="control-label" for="city">City<sup>*</sup></label>
             <div class="controls">
-              <input type="text" id="city" placeholder="city"> 
+              <input type="text" name="city" placeholder="city"> 
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="state">State<sup>*</sup></label>
             <div class="controls">
-              <select id="state">
+              <select name="state">
                 <option value="">-</option>
-                <option value="1">Alabama</option><option value="2">Alaska</option><option value="3">Arizona</option><option value="4">Arkansas</option><option value="5">California</option><option value="6">Colorado</option><option value="7">Connecticut</option><option value="8">Delaware</option><option value="53">District of Columbia</option><option value="9">Florida</option><option value="10">Georgia</option><option value="11">Hawaii</option><option value="12">Idaho</option><option value="13">Illinois</option><option value="14">Indiana</option><option value="15">Iowa</option><option value="16">Kansas</option><option value="17">Kentucky</option><option value="18">Louisiana</option><option value="19">Maine</option><option value="20">Maryland</option><option value="21">Massachusetts</option><option value="22">Michigan</option><option value="23">Minnesota</option><option value="24">Mississippi</option><option value="25">Missouri</option><option value="26">Montana</option><option value="27">Nebraska</option><option value="28">Nevada</option><option value="29">New Hampshire</option><option value="30">New Jersey</option><option value="31">New Mexico</option><option value="32">New York</option><option value="33">North Carolina</option><option value="34">North Dakota</option><option value="35">Ohio</option><option value="36">Oklahoma</option><option value="37">Oregon</option><option value="38">Pennsylvania</option><option value="51">Puerto Rico</option><option value="39">Rhode Island</option><option value="40">South Carolina</option><option value="41">South Dakota</option><option value="42">Tennessee</option><option value="43">Texas</option><option value="52">US Virgin Islands</option><option value="44">Utah</option><option value="45">Vermont</option><option value="46">Virginia</option><option value="47">Washington</option><option value="48">West Virginia</option><option value="49">Wisconsin</option><option value="50">Wyoming</option></select>
+                <option value="punjab">Punjab</option><option value="uttar pardesh">Uttar Pardesh</option>></select>
             </div>
         </div>      
         <div class="control-group">
             <label class="control-label" for="postcode">Zip / Postal Code<sup>*</sup></label>
             <div class="controls">
-              <input type="text" id="postcode" placeholder="Zip / Postal Code"> 
+              <input type="number" name="postcode" placeholder="Zip / Postal Code"> 
             </div>
         </div>
         
         <div class="control-group">
             <label class="control-label" for="country">Country<sup>*</sup></label>
             <div class="controls">
-            <select id="country">
+            <select name="country">
                 <option value="">-</option>
-                <option value="1">Country</option>
+                <option value="India">India</option>
             </select>
             </div>
         </div>  
         <div class="control-group">
             <label class="control-label" for="aditionalInfo">Additional information</label>
             <div class="controls">
-              <textarea name="aditionalInfo" id="aditionalInfo" cols="26" rows="3">Additional information</textarea>
+              <textarea name="aditionalInfo" id="aditionalInfo" cols="26" rows="3" placeholder="Brief introduction"></textarea>
             </div>
         </div>
         
         <div class="control-group">
             <label class="control-label" for="mobile">Mobile Phone </label>
             <div class="controls">
-              <input type="text" name="mobile" id="mobile" placeholder="Mobile Phone"> 
+              <input type="number" name="mobile" id="mobile" placeholder="Mobile Phone"> 
             </div>
         </div>
         
@@ -241,8 +264,8 @@
             <div class="controls">
                 <input type="hidden" name="email_create" value="1">
                 <input type="hidden" name="is_new_customer" value="1">
-                <input class="btn btn-large" type="submit" value="Register">
-                <input class="btn btn-large" type="reset" value="Cancel">
+                <input class="btn btn-large" type="submit" name="submit" value="Register">
+                <input class="btn btn-large" type="reset" name="cancel" value="Cancel">
             </div>
         </div>      
     <p class="pull-right badge badge-important">[ * ] Required field    </p>
@@ -256,7 +279,7 @@
 
 </section>
 
-                    
+               
 
                     <!-- Featured accordion ends here -->
 
