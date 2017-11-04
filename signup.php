@@ -138,7 +138,7 @@ else
             echo "<h2>Registration Successful!</h2>";
               echo "<p>Your user name is $user_first_name  $user_last_name</p>";
                echo "<p>Your user user id is $user_email</p>";
-                 echo "<p>Thank you for sign up. Click <a href='mypage.php'>here </a>to log in </p><br>";
+                 echo "<p>Thank you for sign up. Click <a href='login.php'>here </a>to log in </p><br>";
                 }
 
 }
@@ -169,9 +169,9 @@ mysqli_close($con);
         <div class="control-group">
         <label class="control-label">Title <sup>*</sup></label>
         <div class="controls">
-        <select class="span1" name="personTitle" >
+        <select class="span1" name="personTitle" required>
             <option value="">-</option>
-            <option value="Mr">Mr.</option>
+            <option value="Mr">Mr</option>
             <option value="Mrs">Mrs</option>
             <option value="Miss">Miss</option>
         </select>
@@ -180,34 +180,34 @@ mysqli_close($con);
         <div class="control-group">
             <label class="control-label" for="inputFname1">First name <sup>*</sup></label>
             <div class="controls">
-              <input type="text" name="inputFname1" placeholder="First Name">
+              <input type="text" name="inputFname1" placeholder="First Name" required>
             </div>
          </div>
          <div class="control-group">
             <label class="control-label" for="inputLnam">Last name <sup>*</sup></label>
             <div class="controls">
-              <input type="text" name="inputLnam" placeholder="Last Name">
+              <input type="text" name="inputLnam" placeholder="Last Name" required>
             </div>
          </div>
         <div class="control-group">
         <label class="control-label" for="input_email">Email <sup>*</sup></label>
         <div class="controls">
-          <input type="text" name="input_email" placeholder="Email">
+          <input type="text" name="input_email" placeholder="Email" required>
         </div>
       </div>      
     <div class="control-group">
         <label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
         <div class="controls">
-          <input type="password" name="inputPassword1" placeholder="Password">
+          <input type="password" name="inputPassword1" placeholder="Password" required>
         </div>
       </div>   
    
         <div class="control-group">
         <label class="control-label">Date of Birth <sup>*</sup></label>
         <div class="controls">
-          <input type="number" class="span1" " name="b_day" placeholder="DD" min="1" max="31"> 
-<input type="number" class="span1" name="b_month" placeholder="MM" min="1" max="12"> 
-<input type="number" class="span1"  name="b_year" placeholder="YYYY" min="1900" max="2017"> 
+          <input type="number" class="span1" " name="b_day" placeholder="DD" min="1" max="31" required> 
+<input type="number" class="span1" name="b_month" placeholder="MM" min="1" max="12" required> 
+<input type="number" class="span1"  name="b_year" placeholder="YYYY" min="1900" max="2017" required> 
         </div>
       </div>
 
@@ -218,44 +218,83 @@ mysqli_close($con);
         <div class="control-group">
             <label class="control-label" for="city">City<sup>*</sup></label>
             <div class="controls">
-              <input type="text" name="city" placeholder="city"> 
+              <input type="text" name="city" placeholder="city" required> 
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="state">State<sup>*</sup></label>
             <div class="controls">
-              <select name="state">
+              <select name="state" required>
                 <option value="">-</option>
-                <option value="punjab">Punjab</option><option value="uttar pardesh">Uttar Pardesh</option>></select>
+                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+<option value="Andhra Pradesh">Andhra Pradesh</option>
+<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+<option value="Assam">Assam</option>
+<option value="Bihar">Bihar</option>
+<option value="Chandigarh">Chandigarh</option>
+<option value="Chhattisgarh">Chhattisgarh</option>
+<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+<option value="Daman and Diu">Daman and Diu</option>
+<option value="Delhi">Delhi</option>
+<option value="Goa">Goa</option>
+<option value="Gujarat">Gujarat</option>
+<option value="Haryana">Haryana</option>
+<option value="Himachal Pradesh">Himachal Pradesh</option>
+<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+<option value="Jharkhand">Jharkhand</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Kerala">Kerala</option>
+<option value="Lakshadweep">Lakshadweep</option>
+<option value="Madhya Pradesh">Madhya Pradesh</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Manipur">Manipur</option>
+<option value="Meghalaya">Meghalaya</option>
+<option value="Mizoram">Mizoram</option>
+<option value="Nagaland">Nagaland</option>
+<option value="Orissa">Orissa</option>
+<option value="Pondicherry">Pondicherry</option>
+<option value="Punjab">Punjab</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Sikkim">Sikkim</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Tripura">Tripura</option>
+<option value="Uttaranchal">Uttaranchal</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="West Bengal">West Bengal</option></select>
             </div>
         </div>      
         <div class="control-group">
             <label class="control-label" for="postcode">Zip / Postal Code<sup>*</sup></label>
             <div class="controls">
-              <input type="number" name="postcode" placeholder="Zip / Postal Code"> 
+              <input type="number" name="postcode" placeholder="Zip / Postal Code" required/> 
             </div>
         </div>
         
         <div class="control-group">
             <label class="control-label" for="country">Country<sup>*</sup></label>
             <div class="controls">
-            <select name="country">
+            <select name="country" required>
                 <option value="">-</option>
                 <option value="India">India</option>
+                <option value="Canada">Canada</option>
+                     <option value="USA">USA</option>
+                         <option value="China">China</option>
+                              <option value="Japan">Japan</option>
+                                     <option value="Russia">Russia</option>
             </select>
             </div>
         </div>  
         <div class="control-group">
-            <label class="control-label" for="aditionalInfo">Additional information</label>
+            <label class="control-label" for="aditionalInfo">Additional information<sup>*</sup></label>
             <div class="controls">
-              <textarea name="aditionalInfo" id="aditionalInfo" cols="26" rows="3" placeholder="Brief introduction"></textarea>
+              <textarea name="aditionalInfo" id="aditionalInfo" cols="26" rows="3" placeholder="Brief introduction" required/></textarea>
             </div>
         </div>
         
         <div class="control-group">
-            <label class="control-label" for="mobile">Mobile Phone </label>
+            <label class="control-label" for="mobile">Mobile Phone <sup>*</sup></label>
             <div class="controls">
-              <input type="number" name="mobile" id="mobile" placeholder="Mobile Phone"> 
+              <input type="number" name="mobile" id="mobile" placeholder="Mobile Phone" required/> 
             </div>
         </div>
         

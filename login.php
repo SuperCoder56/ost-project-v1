@@ -133,8 +133,8 @@
 		echo "<h2>SUCCESSFULLY LOGIN. GOING TO USER PROFILE PAGE...</h2>";
    
                  echo "<script>setTimeout(function () {
-       window.location.href = 'mypage.php'; //will redirect to your blog page (an ex: blog.html)
-    }, 5000); //will call the function after 4 secs.
+       window.location.href = 'mypage.php?id=$ID'; 
+    }, 5000); 
 </script>";
                   
                  

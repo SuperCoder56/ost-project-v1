@@ -241,36 +241,44 @@ mysqli_close($con);
         <div class="control-group">
             <label class="control-label" for="city">Title<sup>*</sup></label>
             <div class="controls">
-              <input type="text" name="paper_title" placeholder="title"> 
+              <input type="text" name="paper_title" placeholder="title" required /> 
             </div>
         </div>
 
          <div class="control-group">
             <label class="control-label" for="city">Author<sup>*</sup></label>
             <div class="controls">
-              <input type="text" name="author" placeholder="author"> 
+              <input type="text" name="author" placeholder="author" required /> 
             </div>
         </div>
      
         <div class="control-group">
             <label class="control-label" for="city">Publication<sup>*</sup></label>
             <div class="controls">
-              <input type="text" name="publication" placeholder="publication"> 
+              <input type="text" name="publication" placeholder="publication" required /> 
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label" for="state">Subject<sup>*</sup></label>
             <div class="controls">
-              <select name="subject">
+              <select name="subject" required />
                 <option value="">-</option>
-                <option value="wireless">Alabama</option></select>
+                
+                
+                       <option value="Big Data">Big Data</option>
+                    <option value="Cloud Computing">Cloud Computing</option>
+                   <option value="Data Mining">Data Mining</option>
+                    <option value="Internet of Things">Internet of Things</option>
+                      <option value="Security">Security</option>
+                      <option value="Wireless Networks">Wireless Networks</option>
+               </select>
             </div>
         </div>      
         <div class="control-group">
             <label class="control-label" for="postcode">Volume<sup>*</sup></label>
             <div class="controls">
-              <input type="number" name="volume" placeholder="Volume"> 
+              <input type="number" name="volume" placeholder="Volume" required /> 
             </div>
         </div>
         
@@ -278,25 +286,24 @@ mysqli_close($con);
         <div class="control-group">
             <label class="control-label" for="aditionalInfo">Brief introduction</label>
             <div class="controls">
-              <textarea name="paperInfo"  cols="26" rows="3" placeholder="Additional information"></textarea>
+              <textarea name="paperInfo"  cols="26" rows="3" placeholder="Additional information" required /></textarea>
             </div>
         </div>
          <div class="control-group">
         <label class="control-label">Publication Date <sup>*</sup></label>
         <div class="controls">
-          <input type="number" class="span1" " name="p_day" placeholder="DD" min="1" max="31"> 
-<input type="number" class="span1" name="p_month" placeholder="MM" min="1" max="12"> 
-<input type="number" class="span1"  name="p_year" placeholder="YYYY" min="1900" max="2017"> 
+          <input type="number" class="span1" " name="p_day" placeholder="DD" min="1" max="31" required /> 
+<input type="number" class="span1" name="p_month" placeholder="MM" min="1" max="12" required /> 
+<input type="number" class="span1"  name="p_year" placeholder="YYYY" min="1900" max="2017" required /> 
         </div>
       </div>
           
-    <input type="file" name="file" />
+    <input type="file" name="file" required/>
         
     
     <div class="control-group">
             <div class="controls">
-                <input type="hidden" name="email_create" value="1">
-                <input type="hidden" name="is_new_customer" value="1">
+                
                 <input class="btn btn-large" name="submit" type="submit" value="Upload">
                 <input class="btn btn-large" name="reset"type="reset" value="Cancel">
             </div>

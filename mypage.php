@@ -51,6 +51,7 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="site-header">
 
 
@@ -59,7 +60,72 @@
                     <div class="site-name">
                         <h1>Ieee World</h1>
                         <h5>Free wireless networks research papers</h5>
+
                     </div>
+                                     </div>
+<?php
+
+    echo $_GET['id']; 
+      $ID=$_GET['id']; 
+       $con =mysqli_connect("localhost","root","user123");
+       mysqli_select_db($con,"project_database");
+
+       if(!$con)
+        {
+       die('Could not connect: ' .mysqli_error());
+       }
+       else
+       {
+      
+         }
+      
+         $query = mysqli_query($con,"SELECT *  FROM user_table where user_email = '$ID' ") ;
+	
+ 
+      
+              while($a=mysqli_fetch_array($query))
+              {
+
+           echo $a['user_first_name'] . "&nbsp;<h1>" .$a['user_last_name'] ."&nbsp;"  .$a['user_city'] ."&nbsp;" .$a['user_email'] 
+           . "&nbsp;</h1>" .$a['user_password'];
+          echo "<br>";
+              }
+
+        $count = mysqli_num_rows($query);
+
+	if( $count==1)
+	{
+		
+		echo "<h2>Welcome to Ieee World user home page</h1>";
+                 while($a=mysqli_fetch_array($query))
+              {
+
+           echo $a['user_first_name'] . "&nbsp;<h1>" .$a['user_last_name'] ."&nbsp;"  .$a['user_city'] ."&nbsp;" .$a['user_email'] 
+           . "&nbsp;</h1>" .$a['user_password'];
+          echo "<br>";
+              }
+   
+    
+                  
+                 
+
+	}
+	else
+	{
+		echo "<p>Please log in to view your saved pages.Click <a href='login.php'>here</a>to log in<p>";
+	}
+
+       
+
+       mysqli_close($con);
+         
+         
+
+
+
+
+?>
+  
 
                     <!-- Site Name ends -->
 

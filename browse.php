@@ -54,11 +54,87 @@
                 <div class="site-header">
 
 
+
                      <!-- Site Name starts here -->
 
                     <div class="site-name">
                         <h1>Ieee World</h1>
                         <h5>Free wireless networks research papers</h5>
+                         
+                        <?php
+
+   if(isset($_POST['submit'])) {
+   
+       $searchKey = $_POST['searchKey'];
+        $searchData = $_POST['searchData'];
+              
+       $con =mysqli_connect("localhost","root","user123");
+       mysqli_select_db($con,"project_database");
+
+       if(!$con)
+        {
+       die('Could not connect to database server. Please try after some time! ' .mysqli_error());
+       }
+       else
+       {
+           echo "connected";
+         }
+              
+         $query = " ";
+
+          if( $searchKey =="author"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_author = '$searchData' ") ;
+             
+              
+        }
+        if( $searchKey =="publication"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_publication = '$searchData' ") ;
+              
+        }
+        if( $searchKey =="all"){
+         $query = mysqli_query($con,"SELECT *  FROM paper_table ") ;
+          }
+         
+          if( $searchKey =="title"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_title = '$searchData' ") ;
+                  
+        } 
+         
+          if( $searchKey =="subject"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_subject = '$searchData' ") ;
+             
+              
+        }
+         $count = mysqli_num_rows($query);
+         if($count==0)
+         {
+          echo "<p>Data not found,try to change keywords</p>";
+          }
+        
+            
+	       echo "<br>key ".$searcKey;
+                   echo "<br>data ".$searchData;
+                   echo "<br>";
+      
+              while($a=mysqli_fetch_array($query))
+              {
+
+           echo "<div style='float:left;background-color:pink;'><h2>Title: ". $a['paper_title'] . "</h2>&nbsp;<h4>Author: " .$a['paper_author'] ."</h4>&nbsp;<p>Publication: "  .$a['paper_publication'] ."&nbsp;Subject: " .$a['paper_subject'] 
+           . "&nbsp;Volume: " .$a['paper_volume']. "</p><p>Publieshed Date: " .$a['paper_p_month']."&nbsp;" .$a['paper_p_year'] . "</p>
+           <p>Abstract: " .$a['paper_info'] ."</p><p><a href=upload/" .$a['paper_file']. " target='_blank'>Download</a>&nbsp;Size: " .$a['paper_size'] 
+           . "kb&nbsp; </p>";
+      
+        
+          echo "<br></div><br>";
+              }
+              
+
+       mysqli_close($con);  
+}
+
+?>
+                            
+
                     </div>
 
                     <!-- Site Name ends -->
@@ -96,15 +172,18 @@
 <div class="banner text-center" style="margin-bottom: 90px;border:2px solid blue;">
         <ul id="topMenu" class="nav text-center ">
          <li class="">
-         <form class="form-inline navbar-search" method="post" action="products.php" style="padding-top:16px;margin-left: 240px;">
-            <select class="span2" style="padding:11px 4px; height:auto">
-                <option>All</option>
-                <option>Author</option>
-                <option>Publication </option>
+         <form class="form-inline navbar-search" method="post" action="" style="padding-top:16px;margin-left: 240px;">
+            <select class="span2" name="searchKey" style="padding:11px 4px; height:auto">
+                <option value="all">All</option>
+                <option value="title">Title</option>
+                  <option value="author">Author</option>
+                 <option value="subject">Subject</option>
+                
+                <option value="publication">Publication </option>
                
             </select> 
-            <input class="span4" type="text" placeholder="eg. enter any keywords, author name and publication" style="padding:11px 4px;">
-            <button type="submit" class="btn btn-warning btn-large" style="margin-top:0">Search </button>
+            <input class="span4" name="searchData"type="text" placeholder="eg. enter any keywords, author name and publication" style="padding:11px 4px;">
+            <button type="submit" name="submit" class="btn btn-warning btn-large" style="margin-top:0">Search </button>
         </form>
         </li>
         </ul>
