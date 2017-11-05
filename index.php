@@ -60,6 +60,8 @@
                     <div class="site-name">
                         <h1>Ieee World</h1>
                         <h5>Free wireless networks research papers</h5>
+                                   
+
                     </div>
 
                     <!-- Site Name ends -->
@@ -78,7 +80,7 @@
                                     <li><a href="upload.php">Upload</a></li>
                                     <li><a href="signup.php">Sign up</a></li>
                                      <li><a href="login.php">Log in </a></li>
-                                      <li><a href="admin.php">Admin log in </a></li>
+                                      
                                 </ul>
                                 <form class="search-form">
                                     <div class="input-append ">
@@ -130,24 +132,62 @@
                         <a data-slide="prev" href="#myCarousel" class="carousel-control left"><i class="fw-icon-chevron-left"></i></a>
                         <a data-slide="next" href="#myCarousel" class="carousel-control right"><i class="fw-icon-chevron-right"></i></a>
                     </div>
-                </div>
+</div>
+
+
+
         
                  <!-- Banner ends here -->
-<div class="banner text-center" style="margin-bottom: 90px;border:2px solid blue;">
+              <div class="banner text-center" style="margin-bottom: 90px;border:2px solid  #95bcf9;">
         <ul id="topMenu" class="nav text-center ">
          <li class="">
-         <form class="form-inline navbar-search" method="post" action="products.php" style="padding-top:16px;margin-left: 240px;">
-            <select class="span2" style="padding:11px 4px; height:auto">
-                <option>All</option>
-                <option>Author</option>
-                <option>Publication </option>
+         <form class="form-inline navbar-search" method="post" action="" style="padding-top:16px;margin-left: 240px;">
+            <select class="span2" name="searchKey" style="padding:11px 4px; height:auto">
+                <option value="*">All</option>
+                <option value="paper_title">Title</option>
+                  <option value="paper_author">Author</option>
+                 <option value="paper_subject">Subject</option>
+                
+                <option value="paper_publication">Publication </option>
                
             </select> 
-            <input class="span4" type="text" placeholder="eg. enter any keywords, author name and publication" style="padding:11px 4px;">
-            <button type="submit" class="btn btn-warning btn-large" style="margin-top:0"> GO </button>
+            <input class="span4" name="searchData"type="text" placeholder="eg. enter any keywords, author name and publication" style="padding:11px 4px;">
+            <button type="submit" name="submit" class="btn btn-warning btn-large" style="margin-top:0">Search </button>
         </form>
         </li>
         </ul>
+<?php
+
+if(isset($_POST['submit'])){
+
+  
+ $searchKey = $_POST['searchKey'];
+       $searchData = $_POST['searchData'];
+
+if(!empty($searchData) and  $searchKey!="all"){
+                echo "Going to show results on paper search page.";
+     echo "<script>
+       window.location.href = 'browse.php?paper_request_key=$searchKey&paper_request_data=$searchData'; 
+    
+</script>";
+
+  }
+else if (empty($searchData))
+{
+     echo "\n<br><p>Please enter data to search!</p>";
+}else          
+  {          
+           echo "<script>
+       window.location.href = 'browse.php?paper_request_key=paper_author&paper_request_data=jaswinder'; 
+    
+</script>";
+  }
+
+
+}
+?>
+
+
     </div>
 
                  <!-- Main content starts here -->
@@ -219,173 +259,7 @@ Strong Coordination over Multi-hop Line Networks Using Channel Resolvability Cod
                 </div>
                 
 
-                    <!-- Featured slider starts here -->
-                <div class="featured-slider">
-                    <h1>Most Popular</h1>
-                    <h5>More than 10,000 downloads</h5>
-                    <div id="myCarousel1" class="carousel slide">
-
-                        <div class="carousel-inner">
-                           <div class="item active">
-                                <div class="row-fluid">
-                                    
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img1.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-A Fuzzy Probability Bayesian Network Approach for Dynamic Cybersecurity Risk Assessment in Industrial Control Systems</span>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img2.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-Software-Reconfigurable System Supporting Point-to-Point Data Communication Between Vehicle Social Networks and Marketers</span>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img3.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-Cost-Benefit Analysis of V2G Implementation in Distribution Networks Considering PEVs Battery Degradation</span>
-                                                  </div>
-                                                </div> 
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                    <img src="img/img4.jpg" class="b-radius-top">
-                                                      <div class="slider-content b-radius-bottom">
-                                                        <span> 
-The Optimal Control Policy for RF-Powered Backscatter Communication Networks</span>
-                                                      </div>
-                                                </div> 
-                                            </div>
-
-                                        
-                                </div><!--/row-fluid-->
-                            </div>
-                            <div class="item">
-                                <div class="row-fluid">
-                                    
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img1.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-Tuna: an Efficient and Practical Scheme for Wireless Access Point in 5G Networks Virtualization</span>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img2.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-An Adaptive Intelligent Management System of Advertising for Social Networks: A Case Study of Facebook</span>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img3.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-Online Supervised Learning for Hardware-Based Multilayer Spiking Neural Networks Through the Modulation of Weight-Dependent Spike-Timing-Dependent Plasticity</span>
-                                                  </div>
-                                                </div> 
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                    <img src="img/img4.jpg" class="b-radius-top">
-                                                      <div class="slider-content b-radius-bottom">
-                                                        <span> 
-State-of-The-Art Medium Access Control (MAC) Protocols for Underwater Acoustic Networks: A Survey Based on A MAC Reference Model</span>
-                                                      </div>
-                                                </div> 
-                                            </div>
-
-                                        
-                                </div><!--/row-fluid-->
-                            </div>
-                            <div class="item">
-                                <div class="row-fluid">
-                                    
-                                           
-                                                     <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img1.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-A Fuzzy Probability Bayesian Network Approach for Dynamic Cybersecurity Risk Assessment in Industrial Control Systems</span>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img2.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-Software-Reconfigurable System Supporting Point-to-Point Data Communication Between Vehicle Social Networks and Marketers</span>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                  <img src="img/img3.jpg" class="b-radius-top">
-                                                  <div class="slider-content b-radius-bottom">
-                                                    <span> 
-Cost-Benefit Analysis of V2G Implementation in Distribution Networks Considering PEVs Battery Degradation</span>
-                                                  </div>
-                                                </div> 
-                                            </div>
-                                            <div class="span3">
-                                                <div class="gallery">
-                                                    <img src="img/img4.jpg" class="b-radius-top">
-                                                      <div class="slider-content b-radius-bottom">
-                                                        <span> 
-The Optimal Control Policy for RF-Powered Backscatter Communication Networks</span>
-                                                      </div>
-                                                </div> 
-                                            </div>
-
-                                        
-                                </div><!--/row-fluid-->
-                            </div>  
-                         
-                        <!-- Carousel items -->
-                        </div>
-                        <a class="carousel-control left" href="#myCarousel1" data-slide="prev"><i class="fw-icon-chevron-left"></i></a>
-                        <a class="carousel-control right" href="#myCarousel1" data-slide="next"><i class="fw-icon-chevron-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="hiding">
-                    <h1>Morbi interdum mollis </h1>
-                    <h5>Vestibulum auctor dapibus nequ</h5>
-                    <div class="carousel slide" id="myCarousel2">
-                                    <!-- Carousel items -->
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="img/img1.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="img/img2.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="img/img3.jpg" alt="">
-                            </div>
-                        </div>
-                        <a class="carousel-control left" href="#myCarousel2" data-slide="prev"><i class="fw-icon-chevron-left"></i></a>
-                        <a class="carousel-control right" href="#myCarousel2" data-slide="next"><i class="fw-icon-chevron-right"></i></a>
-                    </div>
-
-                </div>
-                   <!-- Featured slider ends here -->    
+                 
 
 
                     <!-- Featured content starts here -->
@@ -397,14 +271,37 @@ The Optimal Control Policy for RF-Powered Backscatter Communication Networks</sp
                                     <div class="row-fluid">
                                         <div class="span6">
                                             <div class="block-title">
-                                                <h1 align="center;">Popular search terms</h1>
-                                                <h2>1.A </h2>
+                                                <h1 align="center;">Popular search papers</h1>
+                                               <?php 
+     
+       $con =mysqli_connect("localhost","root","user123");
+       mysqli_select_db($con,"project_database");
+
+       if(!$con)
+        {
+       die('Could not connect to database server. Please try after some time! ' .mysqli_error());
+       }
+        
+       $query = mysqli_query($con,"SELECT *  FROM paper_table limit 10") ;    
+                $count=1;
+        
+              while($a=mysqli_fetch_array($query))
+              {
+                    $index_paper_title=$a['paper_title'];
+
+               echo "<h5><a href='browse.php?paper_request_key=paper_title&paper_request_data=$index_paper_title'>" . $count++ ." " .$index_paper_title. "</a></h5>";
+              }
+              
+  mysqli_close($con);  
+
+
+?>
                                             </div>
                                         </div>
                                         <div class="span6">
                                             <div class="block-content">
                                                 <p>Ranked by number of searches per month</p>
-                                                <a href="#"  class="btn" ><i class="fw-icon-circle-arrow-right"></i>View All</a>
+                                                <a href="browse.php"  class="btn" ><i class="fw-icon-circle-arrow-right"></i>View All</a>
                                             </div>
                                         </div>
                                     </div>
@@ -413,13 +310,36 @@ The Optimal Control Policy for RF-Powered Backscatter Communication Networks</sp
                                         <div class="span6">
                                             <div class="block-title">
                                                <h1>Popuular Authors</h1>
-                                                <h2>1.A </h2>
+                                                 <?php 
+     
+       $con =mysqli_connect("localhost","root","user123");
+       mysqli_select_db($con,"project_database");
+
+       if(!$con)
+        {
+       die('Could not connect to database server. Please try after some time! ' .mysqli_error());
+       }
+        
+       $query = mysqli_query($con,"SELECT *  FROM paper_table limit 10") ;    
+                $count=1;
+        
+              while($a=mysqli_fetch_array($query))
+              {
+                    $index_paper_author=$a['paper_author'];
+
+               echo "<h5><a href='browse.php?paper_request_key=paper_author&paper_request_data=$index_paper_author'>" . $count++ ." " .$index_paper_author. "</a></h5>";
+              }
+              
+  mysqli_close($con);  
+
+
+?>
                                             </div>
                                         </div>
                                         <div class="span6">
                                             <div class="block-content">
                                                 <p>Ranked by number of downloads per month</p>
-                                                <a href="#"  class="btn" ><i class="fw-icon-circle-arrow-right"></i>View all</a>
+                                                <a href="browse.php"  class="btn" ><i class="fw-icon-circle-arrow-right"></i>View all</a>
                                             </div>
                                         </div>
                                     </div>

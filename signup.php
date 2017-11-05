@@ -76,7 +76,7 @@
                                     <li><a href="upload.php">Upload</a></li>
                                     <li><a href="signup.php">Sign up</a></li>
                                      <li><a href="login.php">Log in </a></li>
-                                      <li><a href="admin.php">Admin log in </a></li>
+                                     
                                 </ul>
                                 <form class="search-form">
                                     <div class="input-append ">
@@ -136,9 +136,9 @@ else
             else{
          
             echo "<h2>Registration Successful!</h2>";
-              echo "<p>Your user name is $user_first_name  $user_last_name</p>";
-               echo "<p>Your user user id is $user_email</p>";
-                 echo "<p>Thank you for sign up. Click <a href='login.php'>here </a>to log in </p><br>";
+              echo "<p>Your user name is $user_first_name  $user_last_name.</p>";
+               echo "<p>Your user user id is $user_email.</p>";
+                 echo "<p>Thank you for sign up. Click <a href='login.php'>here</a> to log in. </p><br>";
                 }
 
 }

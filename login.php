@@ -77,7 +77,7 @@
                                     <li><a href="upload.php">Upload</a></li>
                                     <li><a href="signup.php">Sign up</a></li>
                                      <li><a href="login.php">Log in </a></li>
-                                      <li><a href="admin.php">Admin log in </a></li>
+                                      
                                 </ul>
                                 <form class="search-form">
                                     <div class="input-append ">
@@ -91,10 +91,9 @@
 
                     <!-- Menu ends -->
                 </div>
+
+<div class="container b-radius-top" style="padding-top:2px;height:6px;margin-right:10px;width:80%;text-align:left;">
 <?php
-
-
-
    if(isset($_POST['submit'])) {
    
        $ID = $_POST['inputEmail'];
@@ -156,7 +155,7 @@
 
 ?>
      
-          
+</div>          
 
 
     <div  class="text-center" style="margin-top: 60px;">

@@ -60,79 +60,7 @@
                     <div class="site-name">
                         <h1>Ieee World</h1>
                         <h5>Free wireless networks research papers</h5>
-                         
-                        <?php
-
-   if(isset($_POST['submit'])) {
-   
-       $searchKey = $_POST['searchKey'];
-        $searchData = $_POST['searchData'];
-              
-       $con =mysqli_connect("localhost","root","user123");
-       mysqli_select_db($con,"project_database");
-
-       if(!$con)
-        {
-       die('Could not connect to database server. Please try after some time! ' .mysqli_error());
-       }
-       else
-       {
-           echo "connected";
-         }
-              
-         $query = " ";
-
-          if( $searchKey =="author"){
-          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_author = '$searchData' ") ;
-             
-              
-        }
-        if( $searchKey =="publication"){
-          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_publication = '$searchData' ") ;
-              
-        }
-        if( $searchKey =="all"){
-         $query = mysqli_query($con,"SELECT *  FROM paper_table ") ;
-          }
-         
-          if( $searchKey =="title"){
-          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_title = '$searchData' ") ;
-                  
-        } 
-         
-          if( $searchKey =="subject"){
-          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_subject = '$searchData' ") ;
-             
-              
-        }
-         $count = mysqli_num_rows($query);
-         if($count==0)
-         {
-          echo "<p>Data not found,try to change keywords</p>";
-          }
-        
-            
-	       echo "<br>key ".$searcKey;
-                   echo "<br>data ".$searchData;
-                   echo "<br>";
-      
-              while($a=mysqli_fetch_array($query))
-              {
-
-           echo "<div style='float:left;background-color:pink;'><h2>Title: ". $a['paper_title'] . "</h2>&nbsp;<h4>Author: " .$a['paper_author'] ."</h4>&nbsp;<p>Publication: "  .$a['paper_publication'] ."&nbsp;Subject: " .$a['paper_subject'] 
-           . "&nbsp;Volume: " .$a['paper_volume']. "</p><p>Publieshed Date: " .$a['paper_p_month']."&nbsp;" .$a['paper_p_year'] . "</p>
-           <p>Abstract: " .$a['paper_info'] ."</p><p><a href=upload/" .$a['paper_file']. " target='_blank'>Download</a>&nbsp;Size: " .$a['paper_size'] 
-           . "kb&nbsp; </p>";
-      
-        
-          echo "<br></div><br>";
-              }
-              
-
-       mysqli_close($con);  
-}
-
-?>
+                        
                             
 
                     </div>
@@ -153,7 +81,7 @@
                                     <li><a href="upload.php">Upload</a></li>
                                     <li><a href="signup.php">Sign up</a></li>
                                      <li><a href="login.php">Log in </a></li>
-                                      <li><a href="admin.php">Admin log in </a></li>
+                                     
                                 </ul>
                                 <form class="search-form">
                                     <div class="input-append ">
@@ -169,7 +97,7 @@
                 </div>
 
               
-<div class="banner text-center" style="margin-bottom: 90px;border:2px solid blue;">
+<div class="banner text-center" style="margin-bottom:10px;border:2px solid #95bcf9;">
         <ul id="topMenu" class="nav text-center ">
          <li class="">
          <form class="form-inline navbar-search" method="post" action="" style="padding-top:16px;margin-left: 240px;">
@@ -182,14 +110,126 @@
                 <option value="publication">Publication </option>
                
             </select> 
-            <input class="span4" name="searchData"type="text" placeholder="eg. enter any keywords, author name and publication" style="padding:11px 4px;">
+            <input class="span4" name="searchData"type="text" placeholder="eg. enter any keywords, author name and publication" style="padding:16px 16px;">
             <button type="submit" name="submit" class="btn btn-warning btn-large" style="margin-top:0">Search </button>
         </form>
         </li>
         </ul>
     </div>
 
+ <div class="container b-radius-top" style="padding-top:0px;height:600px;margin-right:800px;width:80%;clear:both;">
+
+                        <?php
+
+   if(isset($_POST['submit']) or !empty( $_GET['paperId'] ) or !empty( $_GET['paper_request_key'] ) or !empty( $_GET['paper_request_data'] )){
    
+       $searchKey = $_POST['searchKey'];
+        $searchData = $_POST['searchData'];
+      
+       
+       if (empty($searchData) and empty( $_GET['paper_request_key'] ))
+{
+     echo "\n<br><p>Please enter data to search!</p>";
+}
+       $con =mysqli_connect("localhost","root","user123");
+       mysqli_select_db($con,"project_database");
+    
+
+       if(!$con)
+        {
+       die('Could not connect to database server. Please try after some time! ' .mysqli_error());
+       }
+       else
+       {
+          
+         }
+              
+         $query = " ";
+
+          if( $searchKey =="author"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_author = '$searchData' ") ;
+            
+             
+              
+        }
+        if( $searchKey =="publication"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_publication = '$searchData' ") ;
+          
+              
+        }
+       
+         
+          if( $searchKey =="title"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_title = '$searchData' ") ;
+                
+        } 
+         
+          if( $searchKey =="subject"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_subject = '$searchData' ") ;  
+            
+        }
+          if(!empty($_GET['paperId'])){
+            $searchIdExtrenal= $_GET['paperId'];
+             echo "External Search request key: Title <br>Search request data: ".  $searchIdExtrenal;
+           $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_title = '$searchIdExtrenal'") ; 
+               
+        }
+
+        if(!empty( $_GET['paper_request_key'] ) and !empty( $_GET['paper_request_data'] )){
+            $paper_request_key_external= $_GET['paper_request_key'];
+             $paper_request_data_external= $_GET['paper_request_data'];
+
+           
+            if(!empty( $_GET['paper_request_key'] ))
+      {
+         echo "<br>External Search key: ".  $paper_request_key_external."";
+              echo "<br>External Search data: ".  $paper_request_data_external."";
+          
+       }
+         if(!empty( $searchData))
+       {
+        echo "<br>Search key: ".$searchKey. "";
+        echo "<br>Search Data: ".$searchData. "";
+
+       }    
+
+           $query = mysqli_query($con, "SELECT *  FROM paper_table where ". $paper_request_key_external." =  '$paper_request_data_external'") ; 
+
+                  
+        }
+        
+        
+        
+         
+         $count = mysqli_num_rows($query);
+         if($count==0)
+         {
+          echo "<p>Data not found, try to change search keys and data.</p>";
+          }
+        
+            
+	      
+      
+              while($a=mysqli_fetch_array($query))
+              {
+                 $color="fcfcfc";
+
+           echo "<div style='float:left;background-color:$color;clear:both;margin-left:450px;'><h2>Title: ". $a['paper_title'] . "</h2>&nbsp;<h4>Author: " .$a['paper_author'] ."</h4>&nbsp;<p>Publication: "  .$a['paper_publication'] ."&nbsp;Subject: " .$a['paper_subject'] 
+           . "&nbsp;Volume: " .$a['paper_volume']. "</p><p>Publieshed Date: " .$a['paper_p_month']."&nbsp;" .$a['paper_p_year'] . "</p>
+           <p>Abstract: " .$a['paper_info'] ."</p><p><a href=upload/" .$a['paper_file']. " target='_blank'>Download</a>&nbsp;Size: " .$a['paper_size'] 
+           . "kb&nbsp; </p>";
+      
+        
+          echo "<br></div><br>";
+              }
+
+              
+
+       mysqli_close($con);  
+}
+
+?> 
+</div>  
                
                     <!-- Featured ends here -->
                     <!-- Featured accordion starts here -->
@@ -199,7 +239,7 @@
 
                 <!-- Main content ends here -->
 
-            <div class="container bg-blue b-radius-bottom">
+            <div class="container bg-blue b-radius-bottom" style="clear:both;">
                 <div class="site-footer">
                     <div class="row-fluid">
                         <div class="span3">

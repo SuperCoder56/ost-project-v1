@@ -21,12 +21,7 @@
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
+       
         <!-- Site header starts here -->
 
 
@@ -60,123 +55,7 @@
                     <div class="site-name">
                         <h1>Ieee World</h1>
                         <h5>Free wireless networks research papers</h5>
-         <?php 
         
-    
-
-   if(isset($_POST['submit'])) {
-   echo "clicked";
-
- $paper_title = $_POST['paper_title'];
-  $paper_author = $_POST['author'];
-     $paper_publication = $_POST['publication'];
-      $paper_subject = $_POST['subject'];
-            $paper_volume = $_POST['volume'];
-               $paper_info = $_POST['paperInfo'];
-                   $paper_p_day = $_POST['p_day'];
- $paper_p_month = $_POST['p_month'];
- $paper_p_year = $_POST['p_year'];
-
-    
-          $file = rand(1000,100000)."-".$_FILES['file']['name'];
-
-       $file_test = $_FILES['file'];
-             print_r($file_test);
-
-
-    $file_loc = $_FILES['file']['tmp_name'];
- $file_size = $_FILES['file']['size'];
- $file_type = $_FILES['file']['type'];
- $folder="upload/";
- 
- // new file size in KB
- $new_size = $file_size/1024;  
- // new file size in KB
- 
- // make file name in lower case
- $new_file_name = strtolower($file);
- // make file name in lower case
- 
- $final_file=str_replace(' ','-',$new_file_name);
- echo "<br>title " . $paper_title;
-echo "<br>author " . $paper_author;
-
-echo "<br>publication " . $paper_publication;
-
-echo "<br>subject " . $paper_subject;
-
-echo "<br>Volume " . $paper_volume;
-
-echo "<br>Info " . $paper_info;
-
-echo "<br>P day " . $paper_p_day;
-
-echo "<br>p m" . $paper_p_month;
-
-
-echo "<br>p y " . $paper_p_year;
-echo "<br>paper file  " . $final_file;
-echo "<br>paper file type  " .$file_type ;
-echo "<br>paper file size  " .$new_size;
-
-
-
- 
-echo "submit is pressed";
-$isUpload=move_uploaded_file($file_loc,$folder.$final_file);
-print_r($isUpload);
-  
-    if($isUpload==1)
-   {
-    echo "inside query";
-   $sql = "INSERT INTO paper_table (paper_title,paper_author, paper_publication, paper_subject,paper_volume, paper_info, paper_p_day,paper_p_month,paper_p_year,paper_file,paper_type,paper_size) VALUES ('$paper_title','$paper_author', '$paper_publication', '$paper_subject','$paper_volume', '$paper_info', '$paper_p_day','$paper_p_month','$paper_p_year', '$final_file','$file_type','$new_size' ) ";
-
-echo "<br>inside p y " . $paper_p_year;
-echo "<br>paper file  " . $final_file;
-echo "<br>paper file type  " .$file_type ;
-echo "<br>paper file size  " .$new_size;
- $con =mysqli_connect("localhost","root","user123");
-        mysqli_select_db($con,"project_database");
-
-      if(!$con)
-      {
-   die('Could not connect: ' .mysqli_error());
-   }
-   else
-   {
-    echo "<br>successful connection";
-    }
-     
-  
-            $retval = mysqli_query($con,$sql );
-         
-            if(! $retval ) {
-               die('Could not enter data: ' . mysqli_error());
-            }
-            else{
-         
-            echo "Entered data successfully\n";
-                }
-
-mysqli_close($con);
-     }
-     else{
-     echo "<br>not uploaded !";
-
-      }
-           
- 
-         
-
-}
-         
-
-
-
-?>
-
-                        
-
                                     
 
 
@@ -198,7 +77,7 @@ mysqli_close($con);
                                     <li><a href="upload.php">Upload</a></li>
                                     <li><a href="signup.php">Sign up</a></li>
                                      <li><a href="login.php">Log in </a></li>
-                                      <li><a href="admin.php">Admin log in </a></li>
+                                  
                                 </ul>
                                 <form class="search-form">
                                     <div class="input-append ">
@@ -229,7 +108,98 @@ mysqli_close($con);
     <ul class="breadcrumb">
         <li><a href="index.html">Home</a> <span class="divider">/</span></li>
         <li class="active">Upload</li>
-    </ul>
+    </ul><div class="container b-radius-top" style="padding-top:50px;height:20px;margin-right:200px;width:80%;">
+
+ <?php 
+        
+    
+
+   if(isset($_POST['submit'])) {
+  
+
+ $paper_title = $_POST['paper_title'];
+  $paper_author = $_POST['author'];
+     $paper_publication = $_POST['publication'];
+      $paper_subject = $_POST['subject'];
+            $paper_volume = $_POST['volume'];
+               $paper_info = $_POST['paperInfo'];
+                   $paper_p_day = $_POST['p_day'];
+ $paper_p_month = $_POST['p_month'];
+ $paper_p_year = $_POST['p_year'];
+
+    
+          $file = rand(1000,100000)."-".$_FILES['file']['name'];
+
+       $file_test = $_FILES['file'];
+            
+
+
+    $file_loc = $_FILES['file']['tmp_name'];
+ $file_size = $_FILES['file']['size'];
+ $file_type = $_FILES['file']['type'];
+ $folder="upload/";
+ 
+ // new file size in KB
+ $new_size = $file_size/1024;  
+ // new file size in KB
+ 
+ // make file name in lower case
+ $new_file_name = strtolower($file);
+ // make file name in lower case
+ 
+ $final_file=str_replace(' ','-',$new_file_name);
+ 
+$isUpload=move_uploaded_file($file_loc,$folder.$final_file);
+
+  
+    if($isUpload==1)
+   {
+    
+   $sql = "INSERT INTO paper_table (paper_title,paper_author, paper_publication, paper_subject,paper_volume, paper_info, paper_p_day,paper_p_month,paper_p_year,paper_file,paper_type,paper_size) VALUES ('$paper_title','$paper_author', '$paper_publication', '$paper_subject','$paper_volume', '$paper_info', '$paper_p_day','$paper_p_month','$paper_p_year', '$final_file','$file_type','$new_size' ) ";
+
+
+ $con =mysqli_connect("localhost","root","user123");
+        mysqli_select_db($con,"project_database");
+
+      if(!$con)
+      {
+   die('Could not connect: ' .mysqli_error());
+   }
+   else
+   {
+    
+    }
+     
+  
+            $retval = mysqli_query($con,$sql );
+         
+            if(! $retval ) {
+               die('Failed to upload paper. Please try after some time. Error code: ' . mysqli_error());
+            }
+            else{
+         
+            echo "File uploaded sucessfully. Click <a href='browse.php?paperId=$paper_title'>here to view your paper</a>\n";
+                }
+
+mysqli_close($con);
+     }
+     else{
+     echo "<br>File not uploaded !";
+
+      }
+           
+ 
+         
+
+}
+         
+
+
+
+?>
+</div>
+                        
+
     <div class="well">
     
     <form class="form-horizontal" method="post" action="" enctype="multipart/form-data" >

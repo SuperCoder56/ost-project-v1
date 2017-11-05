@@ -63,69 +63,7 @@
 
                     </div>
                                      </div>
-<?php
 
-    echo $_GET['id']; 
-      $ID=$_GET['id']; 
-       $con =mysqli_connect("localhost","root","user123");
-       mysqli_select_db($con,"project_database");
-
-       if(!$con)
-        {
-       die('Could not connect: ' .mysqli_error());
-       }
-       else
-       {
-      
-         }
-      
-         $query = mysqli_query($con,"SELECT *  FROM user_table where user_email = '$ID' ") ;
-	
- 
-      
-              while($a=mysqli_fetch_array($query))
-              {
-
-           echo $a['user_first_name'] . "&nbsp;<h1>" .$a['user_last_name'] ."&nbsp;"  .$a['user_city'] ."&nbsp;" .$a['user_email'] 
-           . "&nbsp;</h1>" .$a['user_password'];
-          echo "<br>";
-              }
-
-        $count = mysqli_num_rows($query);
-
-	if( $count==1)
-	{
-		
-		echo "<h2>Welcome to Ieee World user home page</h1>";
-                 while($a=mysqli_fetch_array($query))
-              {
-
-           echo $a['user_first_name'] . "&nbsp;<h1>" .$a['user_last_name'] ."&nbsp;"  .$a['user_city'] ."&nbsp;" .$a['user_email'] 
-           . "&nbsp;</h1>" .$a['user_password'];
-          echo "<br>";
-              }
-   
-    
-                  
-                 
-
-	}
-	else
-	{
-		echo "<p>Please log in to view your saved pages.Click <a href='login.php'>here</a>to log in<p>";
-	}
-
-       
-
-       mysqli_close($con);
-         
-         
-
-
-
-
-?>
-  
 
                     <!-- Site Name ends -->
 
@@ -143,7 +81,7 @@
                                     <li><a href="upload.php">Upload</a></li>
                                     <li><a href="signup.php">Sign up</a></li>
                                      <li><a href="login.php">Log in </a></li>
-                                      <li><a href="admin.php">Admin log in </a></li>
+                                     
                                 </ul>
                                 <form class="search-form">
                                     <div class="input-append ">
@@ -159,23 +97,118 @@
                 </div>
 
               
-<div class="banner text-center" style="margin-bottom: 90px;border:2px solid blue;">
-        <ul id="topMenu" class="nav text-center ">
-         <li class="">
-         <form class="form-inline navbar-search" method="post" action="products.php" style="padding-top:16px;margin-left: 240px;">
-            <select class="span2" style="padding:11px 4px; height:auto">
-                <option>All</option>
-                <option>Author</option>
-                <option>Publication </option>
-               
-            </select> 
-            <input class="span4" type="text" placeholder="eg. enter any keywords, author name and publication" style="padding:11px 4px;">
-            <button type="submit" class="btn btn-warning btn-large" style="margin-top:0"> GO </button>
-        </form>
-        </li>
-        </ul>
-    </div>
+<div class="container b-radius-top" style="padding-top:50px;height:600px;">
+              
+<?php
+      $ID;
 
+      if(!empty($_GET['id'])) {
+      $ID=$_GET['id']; 
+      
+        }
+       $con =mysqli_connect("localhost","root","user123");
+       mysqli_select_db($con,"project_database");
+
+       if(!$con)
+        {
+       die('Could not connect: ' .mysqli_error());
+       }
+       else
+       {
+      
+         }
+      
+         $query = mysqli_query($con,"SELECT *  FROM user_table where user_email = '$ID' ") ;
+	
+ 
+              
+              $user_title;
+  $user_first_name ;
+     $user_last_name ;
+      $user_email;
+            $user_password;
+               $user_b_day;
+                   $user_b_month ;
+            $user_b_year ;
+             $user_city ;
+               $user_state ;
+                  $user_postcode;
+                    $user_country;
+                        $user_extra_info;
+                          $user_mobile;
+             
+              while($a=mysqli_fetch_array($query))
+              {
+                      
+		
+          
+               $user_title = $a['user_title'];
+  $user_first_name = $a['user_first_name'];
+     $user_last_name = $a['user_last_name'];
+      $user_email = $a['user_email'];
+            $user_password = $a['user_password'];
+               $user_b_day = $a['user_b_day'];
+                   $user_b_month =$a['user_b_month'];
+            $user_b_year = $a['user_b_year'];
+             $user_city =$a['user_city'];
+               $user_state = $a['user_state'];
+                  $user_postcode = $a['user_postcode'];
+                    $user_country = $a['user_country'];
+                        $user_extra_info = $a['user_extra_info'];
+                          $user_mobile = $a['user_mobile'];
+
+       echo "<center><h2>Welcome $user_title $user_first_name $user_last_name </h1></center>";
+          
+        echo "<center><p style='padding-left:150px;'>log in as $user_email</p></center>";
+           echo"<br>";
+                echo "<div style='padding-left:180px;'>";
+              echo "<h4>Your personal details :</h4>";
+               echo "<p>Name: $user_first_name $user_last_name";
+                echo "<p>Email: $user_email";
+               echo "<p>D.O.B.: $user_b_day/$user_b_month/$user_b_year";
+                
+               echo"<br>";
+              echo "<h4>Your address :</h4>";
+               echo "<p>city: $user_city";
+                echo "<p>State: $user_state";
+                echo "<p>Country: $user_counrty";
+                 echo "<p>mobile: $user_mobile";
+                   
+              echo"<br>";
+              echo "<h4>About yourslef:</h4>";
+               echo "<p>Brief introduction: $user_extra_info";
+
+            
+               echo "</div>";
+               
+
+              }
+
+         
+
+        $count = mysqli_num_rows($query);
+
+	if( $count==1)
+	{
+		
+                
+	}
+	else
+	{
+		echo "<p>Please log in to view your saved pages.Click <a href='login.php'>here</a> to log in.<p>";
+	}
+
+       
+
+       mysqli_close($con);
+         
+
+?>
+
+ 
+  </div>
+ 
+   
    
                
                     <!-- Featured ends here -->
