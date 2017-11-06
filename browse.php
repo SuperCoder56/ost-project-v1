@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js"> 
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -21,18 +18,8 @@
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
-        <!-- Site header starts here -->
-
-            
-
-
-             <!-- main content starts here -->
+       
+            <!-- main content starts here -->
 
             <div class="container b-radius-top">
                 <div class="top-bar b-radius">
@@ -119,111 +106,94 @@
 
  <div class="container b-radius-top" style="padding-top:0px;height:600px;margin-right:800px;width:80%;clear:both;">
 
-                        <?php
+    <?php
 
-   if(isset($_POST['submit']) or !empty( $_GET['paperId'] ) or !empty( $_GET['paper_request_key'] ) or !empty( $_GET['paper_request_data'] )){
-   
-       $searchKey = $_POST['searchKey'];
-        $searchData = $_POST['searchData'];
+       if(isset($_POST['submit']) or !empty( $_GET['paperId'] ) 
+       or !empty( $_GET['paper_request_key'] ) or !empty( $_GET    ['paper_request_data'] ))
+        {
+            $searchKey = $_POST['searchKey'];
+            $searchData = $_POST['searchData'];
+           if(!empty($searchData))
+         {
+             echo "<br>Search key: ".$searchKey. "";
+             echo "<br>Search Data: ".$searchData. "";
+           }    
       
-       
-       if (empty($searchData) and empty( $_GET['paper_request_key'] ))
-{
-     echo "\n<br><p>Please enter data to search!</p>";
-}
+       if(empty($searchData) and empty( $_GET['paper_request_key'] ))
+       {
+            echo "\n<br><p>Please enter data to search!</p>";
+       }
+           
        $con =mysqli_connect("localhost","root","user123");
        mysqli_select_db($con,"project_database");
     
-
        if(!$con)
         {
        die('Could not connect to database server. Please try after some time! ' .mysqli_error());
        }
-       else
-       {
-          
-         }
-              
+                     
          $query = " ";
 
-          if( $searchKey =="author"){
-          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_author = '$searchData' ") ;
-            
-             
-              
+       if( $searchKey =="author"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_author = '$searchData' ") ;     
+        }
+        if( $searchKey =="all"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table") ;     
         }
         if( $searchKey =="publication"){
           $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_publication = '$searchData' ") ;
-          
-              
         }
-       
-         
-          if( $searchKey =="title"){
-          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_title = '$searchData' ") ;
-                
+        if( $searchKey =="title"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_title = '$searchData' ") ;               
         } 
-         
-          if( $searchKey =="subject"){
-          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_subject = '$searchData' ") ;  
-            
+        if( $searchKey =="subject"){
+          $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_subject = '$searchData' ") ;      
         }
-          if(!empty($_GET['paperId'])){
+        if(!empty($_GET['paperId'])){
             $searchIdExtrenal= $_GET['paperId'];
              echo "External Search request key: Title <br>Search request data: ".  $searchIdExtrenal;
-           $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_title = '$searchIdExtrenal'") ; 
-               
+            $query = mysqli_query($con,"SELECT *  FROM paper_table where paper_title = '$searchIdExtrenal'") ;      
         }
 
         if(!empty( $_GET['paper_request_key'] ) and !empty( $_GET['paper_request_data'] )){
             $paper_request_key_external= $_GET['paper_request_key'];
-             $paper_request_data_external= $_GET['paper_request_data'];
+            $paper_request_data_external= $_GET['paper_request_data'];
 
            
-            if(!empty( $_GET['paper_request_key'] ))
-      {
-         echo "<br>External Search key: ".  $paper_request_key_external."";
-              echo "<br>External Search data: ".  $paper_request_data_external."";
+        if(!empty( $_GET['paper_request_key'] ))
+         {
+             echo "<br>External Search key: ".  $paper_request_key_external."";
+             echo "<br>External Search data: ".  $paper_request_data_external."";
+         }
+        
+            if(!empty( $_GET['paper_request_key'] ) and !empty( $_GET['paper_request_data'] ))
+              $query = mysqli_query($con, "SELECT *  FROM paper_table 
+              where ". $paper_request_key_external." =  '$paper_request_data_external'");  
+           
+          }
           
-       }
-         if(!empty( $searchData))
-       {
-        echo "<br>Search key: ".$searchKey. "";
-        echo "<br>Search Data: ".$searchData. "";
-
-       }    
-
-           $query = mysqli_query($con, "SELECT *  FROM paper_table where ". $paper_request_key_external." =  '$paper_request_data_external'") ; 
-
-                  
-        }
         
-        
-        
-         
          $count = mysqli_num_rows($query);
          if($count==0)
          {
           echo "<p>Data not found, try to change search keys and data.</p>";
           }
         
-            
-	      
-      
-              while($a=mysqli_fetch_array($query))
-              {
+           while($a=mysqli_fetch_array($query))
+           {
                  $color="fcfcfc";
-
-           echo "<div style='float:left;background-color:$color;clear:both;margin-left:450px;'><h2>Title: ". $a['paper_title'] . "</h2>&nbsp;<h4>Author: " .$a['paper_author'] ."</h4>&nbsp;<p>Publication: "  .$a['paper_publication'] ."&nbsp;Subject: " .$a['paper_subject'] 
-           . "&nbsp;Volume: " .$a['paper_volume']. "</p><p>Publieshed Date: " .$a['paper_p_month']."&nbsp;" .$a['paper_p_year'] . "</p>
-           <p>Abstract: " .$a['paper_info'] ."</p><p><a href=upload/" .$a['paper_file']. " target='_blank'>Download</a>&nbsp;Size: " .$a['paper_size'] 
-           . "kb&nbsp; </p>";
-      
+                    
+                 echo "<div style='float:left;background-color:$color;clear:both;margin-left:450px;'>
+                 <h2>Title: ". $a['paper_title'] . "</h2>&nbsp;<h4>Author: " .$a['paper_author'] ."</h4>&nbsp;
+                 <p>Publication: "  .$a['paper_publication'] ."&nbsp;Subject: " .$a['paper_subject'] 
+                 . "&nbsp;Volume: " .$a['paper_volume']. "</p><p>Publieshed Date: " .$a['paper_p_month']."&nbsp;" 
+                 .$a['paper_p_year'] . "</p>
+                  <p>Abstract: " .$a['paper_info'] ."</p><p><a href=upload/" .$a['paper_file']. "
+                  target='_blank'>Download</a>&nbsp;Size: " .$a['paper_size'] 
+                  . "kb&nbsp; </p>";
         
-          echo "<br></div><br>";
+                  echo "<br></div><br>";
               }
-
-              
 
        mysqli_close($con);  
 }
@@ -231,14 +201,7 @@
 ?> 
 </div>  
                
-                    <!-- Featured ends here -->
-                    <!-- Featured accordion starts here -->
-                    
-
-                    <!-- Featured accordion ends here -->
-
-                <!-- Main content ends here -->
-
+                   
             <div class="container bg-blue b-radius-bottom" style="clear:both;">
                 <div class="site-footer">
                     <div class="row-fluid">

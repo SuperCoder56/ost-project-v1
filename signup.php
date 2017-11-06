@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+ <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -21,11 +18,7 @@
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+        
 
         <!-- Site header starts here -->
 
@@ -94,38 +87,31 @@
    if(isset($_POST['submit'])) {
  
 
- $user_title = $_POST['personTitle'];
-  $user_first_name = $_POST['inputFname1'];
-     $user_last_name = $_POST['inputLnam'];
-      $user_email = $_POST['input_email'];
-            $user_password = $_POST['inputPassword1'];
-               $user_b_day = $_POST['b_day'];
-                   $user_b_month = $_POST['b_month'];
-            $user_b_year = $_POST['b_year'];
-             $user_city = $_POST['city'];
-               $user_state = $_POST['state'];
-                  $user_postcode = $_POST['postcode'];
-                    $user_country = $_POST['country'];
-                        $user_extra_info = $_POST['aditionalInfo'];
-                          $user_mobile = $_POST['mobile'];
+             $user_title = $_POST['personTitle'];
+             $user_first_name = $_POST['inputFname1'];
+             $user_last_name = $_POST['inputLnam'];
+             $user_email = $_POST['input_email'];
+             $user_password = $_POST['inputPassword1'];
+             $user_b_day = $_POST['b_day'];
+              $user_b_month = $_POST['b_month'];
+              $user_b_year = $_POST['b_year'];
+              $user_city = $_POST['city'];
+              $user_state = $_POST['state'];
+              $user_postcode = $_POST['postcode'];
+              $user_country = $_POST['country'];
+              $user_extra_info = $_POST['aditionalInfo'];
+              $user_mobile = $_POST['mobile'];
 
-                             
-
-
-
-           $con =mysqli_connect("localhost","root","user123");
+             $con =mysqli_connect("localhost","root","user123");
               mysqli_select_db($con,"project_database");
 
-if(!$con)
-{
-die('Could not connected to database server. Please try after some time!: ' .mysqli_error());
-}
-else
-{
+        if(!$con)
+        {
+             die('Could not connected to database server. Please try after some time!: ' .mysqli_error());
+        }
+        
 
-}
-
-                  $sql1 = "INSERT INTO user_table ( user_title, user_first_name, user_last_name, user_email, user_password, user_b_day, user_b_month, user_b_year, user_city, user_state, user_post_code, user_country, user_extra_info, user_mobile )  VALUES  ( '$user_title' , '$user_first_name' , ' $user_last_name' , '$user_email', '$user_password ' , '$user_b_day' , '$user_b_month' , '$user_b_year' , '$user_city' , '$user_state' , '$user_postcode', '$user_country ', '$user_extra_info' , ' $user_mobile' ) ";
+             $sql1 = "INSERT INTO user_table ( user_title, user_first_name, user_last_name, user_email, user_password, user_b_day, user_b_month, user_b_year, user_city, user_state, user_post_code, user_country, user_extra_info, user_mobile )  VALUES  ( '$user_title' , '$user_first_name' , ' $user_last_name' , '$user_email', '$user_password ' , '$user_b_day' , '$user_b_month' , '$user_b_year' , '$user_city' , '$user_state' , '$user_postcode', '$user_country ', '$user_extra_info' , ' $user_mobile' ) ";
 
 
             $retval = mysqli_query($con,$sql1 );
@@ -135,14 +121,12 @@ else
             }
             else{
          
-            echo "<h2>Registration Successful!</h2>";
-              echo "<p>Your user name is $user_first_name  $user_last_name.</p>";
-               echo "<p>Your user user id is $user_email.</p>";
-                 echo "<p>Thank you for sign up. Click <a href='login.php'>here</a> to log in. </p><br>";
-                }
-
+                 echo "<h2>Registration Successful!</h2>";
+                 echo "<p>Your user name is $user_first_name  $user_last_name.</p>";
+                 echo "<p>Your user user id is $user_email.</p>";
+                  echo "<p>Thank you for sign up. Click <a href='login.php'>here</a> to log in. </p><br>";
+             }
 }
-
 mysqli_close($con);
 
 ?>

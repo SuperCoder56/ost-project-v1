@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -117,85 +114,76 @@
    if(isset($_POST['submit'])) {
   
 
- $paper_title = $_POST['paper_title'];
-  $paper_author = $_POST['author'];
+     $paper_title = $_POST['paper_title'];
+     $paper_author = $_POST['author'];
      $paper_publication = $_POST['publication'];
       $paper_subject = $_POST['subject'];
-            $paper_volume = $_POST['volume'];
-               $paper_info = $_POST['paperInfo'];
-                   $paper_p_day = $_POST['p_day'];
- $paper_p_month = $_POST['p_month'];
- $paper_p_year = $_POST['p_year'];
+      $paper_volume = $_POST['volume'];
+      $paper_info = $_POST['paperInfo'];
+      $paper_p_day = $_POST['p_day'];
+      $paper_p_month = $_POST['p_month'];
+      $paper_p_year = $_POST['p_year'];
 
     
-          $file = rand(1000,100000)."-".$_FILES['file']['name'];
-
+       $file = rand(1000,100000)."-".$_FILES['file']['name'];
        $file_test = $_FILES['file'];
-            
+          
+        $file_loc = $_FILES['file']['tmp_name'];
+        $file_size = $_FILES['file']['size'];
+        $file_type = $_FILES['file']['type'];
+        $folder="upload/";
+ 
+          // new file size in KB
+         $new_size = $file_size/1024;  
+          // new file size in KB
+ 
+          // make file name in lower case
+         $new_file_name = strtolower($file);
+          // make file name in lower case
+ 
+         $final_file=str_replace(' ','-',$new_file_name);
+ 
+          $isUpload=move_uploaded_file($file_loc,$folder.$final_file);
 
-
-    $file_loc = $_FILES['file']['tmp_name'];
- $file_size = $_FILES['file']['size'];
- $file_type = $_FILES['file']['type'];
- $folder="upload/";
- 
- // new file size in KB
- $new_size = $file_size/1024;  
- // new file size in KB
- 
- // make file name in lower case
- $new_file_name = strtolower($file);
- // make file name in lower case
- 
- $final_file=str_replace(' ','-',$new_file_name);
- 
-$isUpload=move_uploaded_file($file_loc,$folder.$final_file);
-
-  
-    if($isUpload==1)
-   {
+     
+          if($isUpload==1)
+          {
     
-   $sql = "INSERT INTO paper_table (paper_title,paper_author, paper_publication, paper_subject,paper_volume, paper_info, paper_p_day,paper_p_month,paper_p_year,paper_file,paper_type,paper_size) VALUES ('$paper_title','$paper_author', '$paper_publication', '$paper_subject','$paper_volume', '$paper_info', '$paper_p_day','$paper_p_month','$paper_p_year', '$final_file','$file_type','$new_size' ) ";
+              $sql = "INSERT INTO paper_table (paper_title,paper_author, paper_publication,
+               paper_subject,paper_volume, paper_info,                     paper_p_day,paper_p_month,paper_p_year,paper_file,paper_type,paper_size)
+                  VALUES ('$paper_title','$paper_author', '$paper_publication', '$paper_subject','$paper_volume',   '$paper_info', '$paper_p_day','$paper_p_month','$paper_p_year', '$final_file','$file_type','$new_size' ) ";
 
 
- $con =mysqli_connect("localhost","root","user123");
+        $con =mysqli_connect("localhost","root","user123");
         mysqli_select_db($con,"project_database");
 
-      if(!$con)
-      {
-   die('Could not connect: ' .mysqli_error());
-   }
-   else
-   {
-    
-    }
+         if(!$con)
+         {
+            die('Could not connect: ' .mysqli_error());
+         }
+  
      
   
-            $retval = mysqli_query($con,$sql );
+            $retval = mysqli_query($con, $sql);
          
             if(! $retval ) {
                die('Failed to upload paper. Please try after some time. Error code: ' . mysqli_error());
             }
             else{
          
-            echo "File uploaded sucessfully. Click <a href='browse.php?paperId=$paper_title'>here to view your paper</a>\n";
+            echo "File uploaded sucessfully. 
+            Click <a href='browse.php?paperId=$paper_title'>here to view your paper</a>\n";
                 }
 
-mysqli_close($con);
+              mysqli_close($con);
      }
      else{
-     echo "<br>File not uploaded !";
+             echo "<br>File not uploaded !";
 
       }
-           
- 
-         
-
+          
 }
          
-
-
-
 ?>
 </div>
                         

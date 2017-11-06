@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js"> 
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -22,15 +19,7 @@
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
-        <!-- Site header starts here -->
-
-            
+       
 
 
              <!-- main content starts here -->
@@ -156,39 +145,33 @@
         </form>
         </li>
         </ul>
-<?php
+       
+   <?php
 
-if(isset($_POST['submit'])){
-
-  
- $searchKey = $_POST['searchKey'];
+    if(isset($_POST['submit'])){
+       $searchKey = $_POST['searchKey'];
        $searchData = $_POST['searchData'];
 
-if(!empty($searchData) and  $searchKey!="all"){
-                echo "Going to show results on paper search page.";
-     echo "<script>
-       window.location.href = 'browse.php?paper_request_key=$searchKey&paper_request_data=$searchData'; 
-    
-</script>";
-
-  }
-else if (empty($searchData))
-{
-     echo "\n<br><p>Please enter data to search!</p>";
-}else          
-  {          
+      if(!empty($searchData) and  $searchKey!="all"){
+        echo "Going to show results on paper search page.";
+        echo "<script>
+        window.location.href = 'browse.php?paper_request_key=$searchKey&paper_request_data=$searchData'; 
+        </script>";
+        }
+        else if (empty($searchData))
+        {
+        echo "\n<br><p>Please enter data to search!</p>";
+        }
+        else          
+         {          
            echo "<script>
-       window.location.href = 'browse.php?paper_request_key=paper_author&paper_request_data=jaswinder'; 
-    
-</script>";
-  }
-
-
-}
-?>
-
-
+           window.location.href = 'browse.php?paper_request_key=paper_author&paper_request_data=jaswinder'; 
+          </script>";
+          }
+     }
+  ?>
     </div>
+
 
                  <!-- Main content starts here -->
                 
@@ -200,15 +183,14 @@ else if (empty($searchData))
                     </div>
                     </div>
                     <div class="row-fluid">
-                        
-                            
                                 <div class="span4">
                             <div class="block">
                                 <div class="block-title">
                                     <h1> <a href="#"  >
-Distributed Optimal On-line Task Allocation Algorithm for Wireless Sensor </a></h1>
+                                   Distributed Optimal On-line Task
+                                  Allocation Algorithm for Wireless Sensor </a></h1>
                                     <h2>Wanli Yu; Yanqiu Huang; Alberto Garcia-Ortiz
-IEEE Sensors Journal</h2>
+                                     IEEE Sensors Journal</h2>
                                 </div>
                                 <div class="block-content">
                                     <p>Nov. 2017</p>
@@ -222,7 +204,7 @@ IEEE Sensors Journal</h2>
                             <div class="block">
                                 <div class="block-title">
                                     <h1>  <a href="#"  >
-Heterogeneous Public Safety Network Architecture based on RAN slicing</a></h1>
+                                   Heterogeneous Public Safety Network Architecture based on RAN slicing</a></h1>
                                     <h2>Dania Marabissi; Romano Fantacci</h2>
                                 </div>
                                 <div class="block-content">
@@ -272,30 +254,30 @@ Strong Coordination over Multi-hop Line Networks Using Channel Resolvability Cod
                                         <div class="span6">
                                             <div class="block-title">
                                                 <h1 align="center;">Popular search papers</h1>
-                                               <?php 
+          <?php 
      
-       $con =mysqli_connect("localhost","root","user123");
-       mysqli_select_db($con,"project_database");
+             $con =mysqli_connect("localhost","root","user123");
+             mysqli_select_db($con,"project_database");
 
-       if(!$con)
-        {
-       die('Could not connect to database server. Please try after some time! ' .mysqli_error());
-       }
+              if(!$con)
+              {
+              die('Could not connect to database server. Please try after some time! ' .mysqli_error());
+              }
         
-       $query = mysqli_query($con,"SELECT *  FROM paper_table limit 10") ;    
-                $count=1;
+              $query = mysqli_query($con,"SELECT *  FROM paper_table limit 10") ;    
+              $count=1;
         
               while($a=mysqli_fetch_array($query))
               {
                     $index_paper_title=$a['paper_title'];
 
-               echo "<h5><a href='browse.php?paper_request_key=paper_title&paper_request_data=$index_paper_title'>" . $count++ ." " .$index_paper_title. "</a></h5>";
+                    echo "<h5><a href='browse.php?paper_request_key=paper_title&paper_request_data=$index_paper_title'>" . $count++ ." " .$index_paper_title. "</a></h5>";
               }
               
-  mysqli_close($con);  
+              mysqli_close($con);  
 
 
-?>
+        ?>
                                             </div>
                                         </div>
                                         <div class="span6">
@@ -310,7 +292,7 @@ Strong Coordination over Multi-hop Line Networks Using Channel Resolvability Cod
                                         <div class="span6">
                                             <div class="block-title">
                                                <h1>Popuular Authors</h1>
-                                                 <?php 
+    <?php 
      
        $con =mysqli_connect("localhost","root","user123");
        mysqli_select_db($con,"project_database");
@@ -321,18 +303,16 @@ Strong Coordination over Multi-hop Line Networks Using Channel Resolvability Cod
        }
         
        $query = mysqli_query($con,"SELECT *  FROM paper_table limit 10") ;    
-                $count=1;
+       $count=1;
         
-              while($a=mysqli_fetch_array($query))
-              {
-                    $index_paper_author=$a['paper_author'];
+        while($a=mysqli_fetch_array($query))
+        {
+             $index_paper_author=$a['paper_author'];
 
-               echo "<h5><a href='browse.php?paper_request_key=paper_author&paper_request_data=$index_paper_author'>" . $count++ ." " .$index_paper_author. "</a></h5>";
-              }
+             echo "<h5><a href='browse.php?paper_request_key=paper_author&paper_request_data=$index_paper_author'>" . $count++ ." " .$index_paper_author. "</a></h5>";
+        }
               
-  mysqli_close($con);  
-
-
+       mysqli_close($con); 
 ?>
                                             </div>
                                         </div>

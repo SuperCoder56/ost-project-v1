@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -21,19 +18,7 @@
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
-        <!-- Site header starts here -->
-
-            
-
-
-             <!-- main content starts here -->
-
+       
             <div class="container b-radius-top">
                 <div class="top-bar b-radius">
                     <div class="top-content">
@@ -92,70 +77,53 @@
                     <!-- Menu ends -->
                 </div>
 
-<div class="container b-radius-top" style="padding-top:2px;height:6px;margin-right:10px;width:80%;text-align:left;">
-<?php
-   if(isset($_POST['submit'])) {
+       <div class="container b-radius-top" style="padding-top:2px;height:6px;margin-right:10px;width:80%;text-align:left;">
+               <?php
+                   if(isset($_POST['submit'])) {
    
-       $ID = $_POST['inputEmail'];
-       $Password = $_POST['inputPassword'];
+                     $ID = $_POST['inputEmail'];
+                      $Password = $_POST['inputPassword'];
+                      $con =mysqli_connect("localhost","root","user123");
+                       mysqli_select_db($con,"project_database");
 
-       
-       $con =mysqli_connect("localhost","root","user123");
-       mysqli_select_db($con,"project_database");
-
-       if(!$con)
-        {
-       die('Could not connect: ' .mysqli_error());
-       }
-       else
-       {
+                     if(!$con)
+                     {
+                     die('Could not connect: ' .mysqli_error());
+                     }
+                     
+                     $query = mysqli_query($con,"SELECT *  FROM user_table where 
+                      user_email = '$ID' and user_password = '$Password' ") ;
+	             $row = mysqli_fetch_array($query);
+                      echo "<br>";
       
-         }
-      
-         $query = mysqli_query($con,"SELECT *  FROM user_table where user_email = '$ID' and user_password = '$Password' ") ;
-	$row = mysqli_fetch_array($query);
-  echo "<br>";
-      
-              while($a=mysqli_fetch_array($query))
-              {
+                     while($a=mysqli_fetch_array($query))
+                     {
 
-           echo $a['user_first_name'] . "&nbsp;" .$a['user_last_name'] ."&nbsp;"  .$a['user_city'] ."&nbsp;" .$a['user_email'] 
-           . "&nbsp;" .$a['user_password'];
-          echo "<br>";
-              }
+                      echo $a['user_first_name'] . "&nbsp;" 
+                     .$a['user_last_name'] ."&nbsp;"  .$a['user_city'] ."&nbsp;" .$a['user_email'] 
+                      . "&nbsp;" .$a['user_password'];
+                        echo "<br>";
+                       }
 
-        $count = mysqli_num_rows($query);
+                       $count = mysqli_num_rows($query);
 
-	if( $count==1)
-	{
-		
-		echo "<h2>SUCCESSFULLY LOGIN. GOING TO USER PROFILE PAGE...</h2>";
-   
-                 echo "<script>setTimeout(function () {
-       window.location.href = 'mypage.php?id=$ID'; 
-    }, 5000); 
-</script>";
-                  
-                 
+	              if( $count==1)
+	              {
+		      echo "<h2>SUCCESSFULLY LOGIN. GOING TO USER PROFILE PAGE...</h2>";
+                      echo "<script>setTimeout(function () {
+                      window.location.href = 'mypage.php?id=$ID'; 
+                      }, 4000); 
+                       </script>";
+                       }
+	              else
+	                {
+		        echo "<p>SORRY... YOU ENTERD WRONG ID AND PASSWORD... PLEASE RETRY...<p>";
+	             }
 
-	}
-	else
-	{
-		echo "<p>SORRY... YOU ENTERD WRONG ID AND PASSWORD... PLEASE RETRY...<p>";
-	}
-
-       
-
-       mysqli_close($con);
-         
-         
+                     mysqli_close($con);
 }
-
-
-
 ?>
-     
-</div>          
+     </div>          
 
 
     <div  class="text-center" style="margin-top: 60px;">
@@ -181,14 +149,6 @@
 </div>
 
                
-                    <!-- Featured ends here -->
-                    <!-- Featured accordion starts here -->
-                    
-
-                    <!-- Featured accordion ends here -->
-
-                <!-- Main content ends here -->
-
             <div class="container bg-blue b-radius-bottom">
                 <div class="site-footer">
                     <div class="row-fluid">
